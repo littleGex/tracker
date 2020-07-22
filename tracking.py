@@ -464,6 +464,8 @@ class Timerwindow (QMainWindow):
     #read in previous session links and settings
     def restoreSession(self):
         fname, _ = QFileDialog.getOpenFileName(self, 'Select session to restore', (os.path.join(os.path.join(os.path.expanduser('~')), 'Documents', 'Tracker')), 'INI files (*.ini)')
+        if not os.path.exists(fname):
+            return
         self.settings = QSettings(fname, QSettings.IniFormat)
         for name, obj in inspect.getmembers(self):
             if isinstance(obj, QLineEdit):
